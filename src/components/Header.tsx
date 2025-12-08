@@ -22,7 +22,7 @@ const Header = () => {
               <Film className="w-6 h-6 text-primary-foreground" />
             </div>
             <span className="font-display text-2xl tracking-wider text-foreground">
-              CINE<span className="text-primary">NEWS</span>
+              NOTICIA<span className="text-primary">CINE</span>
             </span>
           </Link>
 

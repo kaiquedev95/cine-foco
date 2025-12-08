@@ -13,7 +13,7 @@ const Footer = () => {
                 <Film className="w-6 h-6 text-primary-foreground" />
               </div>
               <span className="font-display text-2xl tracking-wider text-foreground">
-                CINE<span className="text-primary">NEWS</span>
+                NOTICIA<span className="text-primary">CINE</span>
               </span>
             </Link>
             <p className="text-muted-foreground max-w-md">
@@ -76,7 +76,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-border mt-10 pt-6 text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} CineNews. Todos os direitos reservados.</p>
+          <p>© {new Date().getFullYear()} Noticia Cine. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>
