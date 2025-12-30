@@ -6,50 +6,53 @@
 
 @layer base {
   :root {
-    --background: 220 20% 10%;
+    /* Navy Blue theme based on logo */
+    --background: 215 50% 12%;
     --foreground: 0 0% 98%;
 
-    --card: 220 18% 13%;
+    --card: 215 45% 15%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 220 18% 13%;
+    --popover: 215 45% 15%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 24 95% 53%;
-    --primary-foreground: 0 0% 100%;
+    /* Golden Yellow from logo "CINE" text */
+    --primary: 45 95% 55%;
+    --primary-foreground: 215 50% 12%;
 
-    --secondary: 220 15% 18%;
+    --secondary: 215 40% 20%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 15% 20%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 215 35% 25%;
+    --muted-foreground: 215 20% 60%;
 
-    --accent: 24 95% 53%;
+    /* Red accent from popcorn/stripes */
+    --accent: 0 75% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 22%;
-    --input: 220 15% 22%;
-    --ring: 24 95% 53%;
+    --border: 215 35% 25%;
+    --input: 215 35% 25%;
+    --ring: 45 95% 55%;
 
     --radius: 0.75rem;
 
     /* Custom tokens */
-    --gradient-hero: linear-gradient(180deg, transparent 0%, hsl(220 20% 10% / 0.8) 50%, hsl(220 20% 10%) 100%);
-    --gradient-card: linear-gradient(180deg, transparent 0%, hsl(220 18% 13% / 0.95) 100%);
-    --shadow-glow: 0 0 30px hsl(24 95% 53% / 0.3);
+    --gradient-hero: linear-gradient(180deg, transparent 0%, hsl(215 50% 12% / 0.8) 50%, hsl(215 50% 12%) 100%);
+    --gradient-card: linear-gradient(180deg, transparent 0%, hsl(215 45% 15% / 0.95) 100%);
+    --shadow-glow: 0 0 30px hsl(45 95% 55% / 0.3);
     --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.4);
 
-    --sidebar-background: 220 18% 13%;
+    --sidebar-background: 215 45% 15%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 24 95% 53%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 15% 18%;
+    --sidebar-primary: 45 95% 55%;
+    --sidebar-primary-foreground: 215 50% 12%;
+    --sidebar-accent: 215 40% 20%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 220 15% 22%;
-    --sidebar-ring: 24 95% 53%;
+    --sidebar-border: 215 35% 25%;
+    --sidebar-ring: 45 95% 55%;
   }
 }
 
@@ -71,7 +74,7 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
   }
 
   .card-hover {

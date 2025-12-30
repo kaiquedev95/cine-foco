@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Film, Instagram, Twitter, Youtube } from "lucide-react";
+import { Instagram, Twitter, Youtube } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   return (
@@ -8,13 +9,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo & Description */}
           <div className="md:col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <Film className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <span className="font-display text-2xl tracking-wider text-foreground">
-                NOTICIA<span className="text-primary">CINE</span>
-              </span>
+            <Link to="/" className="flex items-center mb-4">
+              <img src={logo} alt="Noticia Cine" className="h-16 w-auto" />
             </Link>
             <p className="text-muted-foreground max-w-md">
               Seu portal de notícias sobre filmes, séries e o mundo do entretenimento. 
