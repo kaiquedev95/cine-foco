@@ -1,9 +1,9 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Share2, Clock, User } from "lucide-react";
-import { getNewsBySlug, newsData } from "@/data/news";
+import { ArrowLeft, Share2, Clock, User, Loader2 } from "lucide-react";
+import { useNewsBySlug, useNewsByCategory } from "@/hooks/useNews";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import NewsCard from "@/components/NewsCard";
+import NewsCardDB from "@/components/NewsCardDB";
 import { Badge } from "@/components/ui/badge";
 
 const categoryLabels = {
@@ -15,7 +15,24 @@ const categoryLabels = {
 
 const NewsDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const news = getNewsBySlug(slug || "");
+  const { data: news, isLoading } = useNewsBySlug(slug || "");
+  const { data: categoryNews } = useNewsByCategory(news?.category || "filme");
+
+  const relatedNews = categoryNews
+    ?.filter((n) => n.id !== news?.id)
+    .slice(0, 3) || [];
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="flex items-center justify-center py-40">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!news) {
     return (
@@ -40,10 +57,6 @@ const NewsDetail = () => {
     );
   }
 
-  const relatedNews = newsData
-    .filter((n) => n.category === news.category && n.id !== news.id)
-    .slice(0, 3);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -52,7 +65,7 @@ const NewsDetail = () => {
         {/* Hero Image */}
         <div className="relative h-[50vh] md:h-[70vh]">
           <img
-            src={news.image}
+            src={news.image_url || "https://via.placeholder.com/1920x1080"}
             alt={news.title}
             className="w-full h-full object-cover"
           />
@@ -86,7 +99,7 @@ const NewsDetail = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>{new Date(news.date).toLocaleDateString("pt-BR", {
+                <span>{new Date(news.created_at).toLocaleDateString("pt-BR", {
                   day: "numeric",
                   month: "long",
                   year: "numeric",
@@ -123,8 +136,8 @@ const NewsDetail = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedNews.map((news) => (
-                <NewsCard key={news.id} news={news} />
+              {relatedNews.map((item) => (
+                <NewsCardDB key={item.id} news={item} />
               ))}
             </div>
           </section>

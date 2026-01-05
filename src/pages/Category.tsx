@@ -1,11 +1,11 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
-import { getNewsByCategory, NewsItem } from "@/data/news";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { useNewsByCategory } from "@/hooks/useNews";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import NewsCard from "@/components/NewsCard";
+import NewsCardDB from "@/components/NewsCardDB";
 
-const categoryInfo: Record<NewsItem["category"], { title: string; description: string }> = {
+const categoryInfo: Record<string, { title: string; description: string }> = {
   filme: {
     title: "Filmes",
     description: "As últimas notícias sobre lançamentos, bastidores e tudo sobre o mundo do cinema.",
@@ -26,9 +26,8 @@ const categoryInfo: Record<NewsItem["category"], { title: string; description: s
 
 const Category = () => {
   const { category } = useParams<{ category: string }>();
-  const validCategory = category as NewsItem["category"];
-  const news = getNewsByCategory(validCategory);
-  const info = categoryInfo[validCategory];
+  const { data: news, isLoading } = useNewsByCategory(category || "");
+  const info = category ? categoryInfo[category] : null;
 
   if (!info) {
     return (
@@ -78,7 +77,11 @@ const Category = () => {
         </div>
 
         {/* News Grid */}
-        {news.length > 0 ? (
+        {isLoading ? (
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          </div>
+        ) : news && news.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {news.map((item, index) => (
               <div
@@ -86,7 +89,7 @@ const Category = () => {
                 className="opacity-0 animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <NewsCard news={item} />
+                <NewsCardDB news={item} />
               </div>
             ))}
           </div>
