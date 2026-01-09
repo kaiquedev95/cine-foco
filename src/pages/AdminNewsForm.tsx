@@ -83,9 +83,11 @@ const AdminNewsForm = () => {
       setImagePreview(existingNews.image_url || '');
       setAutoSlug(false);
       // Load external links from existing news
-      const links = (existingNews as any).external_links;
+      const links = existingNews.external_links;
       if (Array.isArray(links)) {
-        setExternalLinks(links);
+        setExternalLinks(links as unknown as ExternalLink[]);
+      } else {
+        setExternalLinks([]);
       }
     }
   }, [existingNews]);
@@ -154,7 +156,7 @@ const AdminNewsForm = () => {
       }
 
       // Filter out empty links
-      const validLinks = externalLinks.filter(link => link.url.trim() !== '');
+      const validLinks = externalLinks.filter((link) => link.url.trim() !== '');
 
       const newsData = {
         title: formData.title,
@@ -165,17 +167,17 @@ const AdminNewsForm = () => {
         author: formData.author,
         featured: formData.featured,
         image_url: imageUrl || null,
-        external_links: validLinks as unknown as null,
+        external_links: validLinks as any,
       };
 
       if (isEditing) {
-        await updateNews.mutateAsync({ id, ...newsData, external_links: validLinks as any });
+        await updateNews.mutateAsync({ id, ...newsData });
         toast({
           title: 'Notícia atualizada',
           description: 'A notícia foi atualizada com sucesso.',
         });
       } else {
-        await createNews.mutateAsync({ ...newsData, external_links: validLinks as any });
+        await createNews.mutateAsync(newsData);
         toast({
           title: 'Notícia criada',
           description: 'A notícia foi criada com sucesso.',
