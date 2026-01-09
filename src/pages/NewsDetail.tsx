@@ -141,9 +141,10 @@ const NewsDetail = () => {
 
             {/* External Links */}
             {(() => {
-              const externalLinks: ExternalLink[] = (news as any).external_links || [];
+              const raw = (news as any).external_links;
+              const externalLinks: ExternalLink[] = Array.isArray(raw) ? (raw as ExternalLink[]) : [];
               if (externalLinks.length === 0) return null;
-              
+
               return (
                 <div className="flex flex-wrap gap-3 mb-8">
                   {externalLinks.map((link, index) => {

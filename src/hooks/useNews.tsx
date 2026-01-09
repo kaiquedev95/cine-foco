@@ -16,6 +16,7 @@ export interface News {
   category: 'filme' | 'serie' | 'streaming' | 'review';
   author: string;
   featured: boolean | null;
+  external_links: NewsRow['external_links'];
   created_at: string;
   updated_at: string;
 }
@@ -30,6 +31,7 @@ const mapRowToNews = (row: NewsRow): News => ({
   category: row.category,
   author: row.author,
   featured: row.featured,
+  external_links: row.external_links,
   created_at: row.created_at,
   updated_at: row.updated_at,
 });
