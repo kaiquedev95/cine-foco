@@ -14,7 +14,22 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, Loader2, Upload, X } from 'lucide-react';
+import { ArrowLeft, Loader2, Upload, X, Plus, Trash2, Instagram, Youtube, Twitter, Facebook, Globe, Link as LinkIcon } from 'lucide-react';
+
+export interface ExternalLink {
+  type: 'instagram' | 'youtube' | 'twitter' | 'tiktok' | 'facebook' | 'website' | 'other';
+  url: string;
+}
+
+const linkTypeLabels: Record<ExternalLink['type'], string> = {
+  instagram: 'Instagram',
+  youtube: 'YouTube',
+  twitter: 'Twitter/X',
+  tiktok: 'TikTok',
+  facebook: 'Facebook',
+  website: 'Site Oficial',
+  other: 'Outro',
+};
 import logo from '@/assets/logo.png';
 
 const generateSlug = (title: string) => {
@@ -47,6 +62,7 @@ const AdminNewsForm = () => {
     featured: false,
     image_url: '',
   });
+  const [externalLinks, setExternalLinks] = useState<ExternalLink[]>([]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,6 +82,11 @@ const AdminNewsForm = () => {
       });
       setImagePreview(existingNews.image_url || '');
       setAutoSlug(false);
+      // Load external links from existing news
+      const links = (existingNews as any).external_links;
+      if (Array.isArray(links)) {
+        setExternalLinks(links);
+      }
     }
   }, [existingNews]);
 
@@ -96,6 +117,20 @@ const AdminNewsForm = () => {
     }
   };
 
+  const addExternalLink = () => {
+    setExternalLinks([...externalLinks, { type: 'instagram', url: '' }]);
+  };
+
+  const updateExternalLink = (index: number, field: keyof ExternalLink, value: string) => {
+    const updated = [...externalLinks];
+    updated[index] = { ...updated[index], [field]: value };
+    setExternalLinks(updated);
+  };
+
+  const removeExternalLink = (index: number) => {
+    setExternalLinks(externalLinks.filter((_, i) => i !== index));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -118,6 +153,9 @@ const AdminNewsForm = () => {
         imageUrl = await uploadNewsImage(imageFile);
       }
 
+      // Filter out empty links
+      const validLinks = externalLinks.filter(link => link.url.trim() !== '');
+
       const newsData = {
         title: formData.title,
         slug: formData.slug,
@@ -127,16 +165,17 @@ const AdminNewsForm = () => {
         author: formData.author,
         featured: formData.featured,
         image_url: imageUrl || null,
+        external_links: validLinks as unknown as null,
       };
 
       if (isEditing) {
-        await updateNews.mutateAsync({ id, ...newsData });
+        await updateNews.mutateAsync({ id, ...newsData, external_links: validLinks as any });
         toast({
           title: 'Notícia atualizada',
           description: 'A notícia foi atualizada com sucesso.',
         });
       } else {
-        await createNews.mutateAsync(newsData);
+        await createNews.mutateAsync({ ...newsData, external_links: validLinks as any });
         toast({
           title: 'Notícia criada',
           description: 'A notícia foi criada com sucesso.',
@@ -336,6 +375,62 @@ const AdminNewsForm = () => {
               placeholder="Conteúdo completo da notícia..."
               className="bg-card border-border min-h-[300px]"
             />
+          </div>
+
+          {/* External Links */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <Label>Links Externos</Label>
+              <Button type="button" variant="outline" size="sm" onClick={addExternalLink}>
+                <Plus className="w-4 h-4 mr-2" />
+                Adicionar Link
+              </Button>
+            </div>
+            
+            {externalLinks.length > 0 && (
+              <div className="space-y-3">
+                {externalLinks.map((link, index) => (
+                  <div key={index} className="flex gap-3 items-start">
+                    <Select
+                      value={link.type}
+                      onValueChange={(value) => updateExternalLink(index, 'type', value)}
+                    >
+                      <SelectTrigger className="w-40 bg-card border-border">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Object.entries(linkTypeLabels).map(([value, label]) => (
+                          <SelectItem key={value} value={value}>
+                            {label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <Input
+                      value={link.url}
+                      onChange={(e) => updateExternalLink(index, 'url', e.target.value)}
+                      placeholder="https://..."
+                      className="flex-1 bg-card border-border"
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => removeExternalLink(index)}
+                      className="text-destructive hover:text-destructive/80"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            )}
+            
+            {externalLinks.length === 0 && (
+              <p className="text-sm text-muted-foreground">
+                Nenhum link externo adicionado. Adicione links do Instagram, YouTube, etc.
+              </p>
+            )}
           </div>
 
           {/* Submit */}
