@@ -1,38 +1,11 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Share2, Clock, User, Loader2, Instagram, Youtube, Twitter, Facebook, Globe, Link as LinkIcon } from "lucide-react";
+import { ArrowLeft, Share2, Clock, User, Loader2 } from "lucide-react";
 import { useNewsBySlug, useNewsByCategory } from "@/hooks/useNews";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NewsCardDB from "@/components/NewsCardDB";
 import { Badge } from "@/components/ui/badge";
-
-interface ExternalLink {
-  type: 'instagram' | 'youtube' | 'twitter' | 'tiktok' | 'facebook' | 'website' | 'other';
-  url: string;
-}
-
-const getLinkIcon = (type: ExternalLink['type']) => {
-  switch (type) {
-    case 'instagram': return Instagram;
-    case 'youtube': return Youtube;
-    case 'twitter': return Twitter;
-    case 'facebook': return Facebook;
-    case 'website': return Globe;
-    default: return LinkIcon;
-  }
-};
-
-const getLinkLabel = (type: ExternalLink['type']) => {
-  switch (type) {
-    case 'instagram': return 'Instagram';
-    case 'youtube': return 'YouTube';
-    case 'twitter': return 'Twitter/X';
-    case 'tiktok': return 'TikTok';
-    case 'facebook': return 'Facebook';
-    case 'website': return 'Site Oficial';
-    default: return 'Link';
-  }
-};
+import { ArticleContent } from "@/components/ArticleContent";
 
 const categoryLabels = {
   filme: "Filme",
@@ -139,44 +112,8 @@ const NewsDetail = () => {
               </button>
             </div>
 
-            {/* External Links */}
-            {(() => {
-              const raw = (news as any).external_links;
-              const externalLinks: ExternalLink[] = Array.isArray(raw) ? (raw as ExternalLink[]) : [];
-              if (externalLinks.length === 0) return null;
-
-              return (
-                <div className="flex flex-wrap gap-3 mb-8">
-                  {externalLinks.map((link, index) => {
-                    const Icon = getLinkIcon(link.type);
-                    return (
-                      <a
-                        key={index}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full text-sm font-medium text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200"
-                      >
-                        <Icon className="w-4 h-4" />
-                        {getLinkLabel(link.type)}
-                      </a>
-                    );
-                  })}
-                </div>
-              );
-            })()}
-
             {/* Article Content */}
-            <div className="prose prose-invert prose-lg max-w-none">
-              {news.content.split("\n\n").map((paragraph, index) => (
-                <p
-                  key={index}
-                  className="text-foreground/90 leading-relaxed mb-6 text-lg"
-                >
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+            <ArticleContent content={news.content} />
           </div>
         </article>
 
