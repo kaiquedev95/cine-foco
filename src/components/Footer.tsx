@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Twitter, Youtube } from "lucide-react";
+import { Instagram, Twitter } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const Footer = () => {
@@ -50,7 +50,9 @@ const Footer = () => {
             <h4 className="font-display text-lg text-foreground mb-4">Redes Sociais</h4>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://www.instagram.com/noticiacine/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
               >
                 <Instagram className="w-5 h-5" />
@@ -60,12 +62,6 @@ const Footer = () => {
                 className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
               >
                 <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
-              >
-                <Youtube className="w-5 h-5" />
               </a>
             </div>
           </div>
