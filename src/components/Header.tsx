@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Film, Tv, Play, Star } from "lucide-react";
+import noticiaCineLogo from "@/assets/noticia-cine-logo.png";
 
 const navLinks = [
   { name: "Filmes", href: "/categoria/filme", icon: Film },
@@ -18,9 +19,11 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className="font-display text-2xl md:text-3xl tracking-wide text-foreground">
-              NOTÍCIA CINE
-            </span>
+            <img 
+              src={noticiaCineLogo} 
+              alt="Notícia Cine" 
+              className="h-8 md:h-10"
+            />
           </Link>
 
           {/* Desktop Navigation */}
