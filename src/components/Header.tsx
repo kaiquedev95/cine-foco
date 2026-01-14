@@ -18,12 +18,8 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className="font-display text-2xl md:text-3xl tracking-wide">
-              <span className="text-[hsl(220,60%,25%)]">NOTÍCIA</span>
-              <span className="text-[hsl(45,90%,50%)]"> C</span>
-              <span className="text-[hsl(0,80%,50%)]">I</span>
-              <span className="text-[hsl(45,90%,50%)]">N</span>
-              <span className="text-[hsl(0,80%,50%)]">E</span>
+            <span className="font-display text-2xl md:text-3xl tracking-wide text-foreground">
+              NOTÍCIA CINE
             </span>
           </Link>
 

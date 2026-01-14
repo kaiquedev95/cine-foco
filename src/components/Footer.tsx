@@ -9,12 +9,8 @@ const Footer = () => {
           {/* Logo & Description */}
           <div className="md:col-span-2">
             <Link to="/" className="flex items-center mb-4">
-              <span className="font-display text-3xl md:text-4xl tracking-wide">
-                <span className="text-[hsl(220,60%,25%)]">NOTÍCIA</span>
-                <span className="text-[hsl(45,90%,50%)]"> C</span>
-                <span className="text-[hsl(0,80%,50%)]">I</span>
-                <span className="text-[hsl(45,90%,50%)]">N</span>
-                <span className="text-[hsl(0,80%,50%)]">E</span>
+              <span className="font-display text-3xl md:text-4xl tracking-wide text-foreground">
+                NOTÍCIA CINE
               </span>
             </Link>
             <p className="text-muted-foreground max-w-md">
