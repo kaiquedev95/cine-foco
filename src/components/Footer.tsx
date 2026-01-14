@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Instagram, Twitter } from "lucide-react";
+import noticiaCineLogo from "@/assets/noticia-cine-logo.png";
 
 const Footer = () => {
   return (
@@ -9,9 +10,11 @@ const Footer = () => {
           {/* Logo & Description */}
           <div className="md:col-span-2">
             <Link to="/" className="flex items-center mb-4">
-              <span className="font-display text-3xl md:text-4xl tracking-wide text-foreground">
-                NOTÍCIA CINE
-              </span>
+              <img 
+                src={noticiaCineLogo} 
+                alt="Notícia Cine" 
+                className="h-10 md:h-12"
+              />
             </Link>
             <p className="text-muted-foreground max-w-md">
               Seu portal de notícias sobre filmes, séries e o mundo do entretenimento. 
