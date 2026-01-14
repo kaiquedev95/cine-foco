@@ -13,7 +13,7 @@ const Footer = () => {
               <img 
                 src={noticiaCineLogo} 
                 alt="Notícia Cine" 
-                className="h-10 md:h-12"
+                className="h-12 md:h-16"
               />
             </Link>
             <p className="text-muted-foreground max-w-md">

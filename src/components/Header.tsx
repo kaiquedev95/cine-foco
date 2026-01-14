@@ -22,7 +22,7 @@ const Header = () => {
             <img 
               src={noticiaCineLogo} 
               alt="Notícia Cine" 
-              className="h-8 md:h-10"
+              className="h-10 md:h-14"
             />
           </Link>
 
