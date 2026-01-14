@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Instagram, Twitter } from "lucide-react";
-import logo from "@/assets/logo.png";
 
 const Footer = () => {
   return (
@@ -10,7 +9,13 @@ const Footer = () => {
           {/* Logo & Description */}
           <div className="md:col-span-2">
             <Link to="/" className="flex items-center mb-4">
-              <img src={logo} alt="Noticia Cine" className="h-16 w-auto" />
+              <span className="font-display text-3xl md:text-4xl tracking-wide">
+                <span className="text-[hsl(220,60%,25%)]">NOTÍCIA</span>
+                <span className="text-[hsl(45,90%,50%)]"> C</span>
+                <span className="text-[hsl(0,80%,50%)]">I</span>
+                <span className="text-[hsl(45,90%,50%)]">N</span>
+                <span className="text-[hsl(0,80%,50%)]">E</span>
+              </span>
             </Link>
             <p className="text-muted-foreground max-w-md">
               Seu portal de notícias sobre filmes, séries e o mundo do entretenimento. 
