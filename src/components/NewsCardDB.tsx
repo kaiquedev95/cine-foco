@@ -53,25 +53,25 @@ const NewsCardDB = ({ news, variant = "default" }: NewsCardDBProps) => {
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
-        {/* Overlay mais forte para melhor legibilidade */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-6">
-          <Badge variant="default" className="mb-3 bg-primary text-primary-foreground shadow-lg">
+        {/* Overlay escuro forte para máxima legibilidade */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/20" />
+        <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+          <Badge variant="default" className="mb-2 md:mb-3 bg-primary text-primary-foreground shadow-lg text-xs">
             {categoryLabels[news.category]}
           </Badge>
-          <h2 className="font-display text-2xl md:text-3xl text-white mb-3 leading-tight group-hover:text-primary transition-colors drop-shadow-lg">
+          <h2 className="font-display text-xl md:text-3xl text-white mb-2 md:mb-3 leading-tight group-hover:text-primary transition-colors [text-shadow:_0_2px_8px_rgb(0_0_0_/_80%)]">
             {news.title}
           </h2>
-          <p className="text-gray-200 line-clamp-2 mb-4 drop-shadow-md">
+          <p className="text-gray-100 text-sm md:text-base line-clamp-2 mb-3 md:mb-4 [text-shadow:_0_1px_4px_rgb(0_0_0_/_60%)]">
             {news.excerpt}
           </p>
-          <div className="flex items-center gap-4 text-sm text-gray-300">
+          <div className="flex items-center gap-3 md:gap-4 text-xs md:text-sm text-gray-200 [text-shadow:_0_1px_3px_rgb(0_0_0_/_50%)]">
             <div className="flex items-center gap-1">
-              <User className="w-4 h-4" />
+              <User className="w-3 h-3 md:w-4 md:h-4" />
               <span>{news.author}</span>
             </div>
             <div className="flex items-center gap-1">
-              <Clock className="w-4 h-4" />
+              <Clock className="w-3 h-3 md:w-4 md:h-4" />
               <span>
                 {new Date(news.created_at).toLocaleDateString("pt-BR")}
               </span>
