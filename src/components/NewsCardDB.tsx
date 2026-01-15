@@ -53,18 +53,19 @@ const NewsCardDB = ({ news, variant = "default" }: NewsCardDBProps) => {
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+        {/* Overlay mais forte para melhor legibilidade */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6">
-          <Badge variant="default" className="mb-3 bg-primary text-primary-foreground">
+          <Badge variant="default" className="mb-3 bg-primary text-primary-foreground shadow-lg">
             {categoryLabels[news.category]}
           </Badge>
-          <h2 className="font-display text-2xl md:text-3xl text-foreground mb-3 leading-tight group-hover:text-primary transition-colors">
+          <h2 className="font-display text-2xl md:text-3xl text-white mb-3 leading-tight group-hover:text-primary transition-colors drop-shadow-lg">
             {news.title}
           </h2>
-          <p className="text-muted-foreground line-clamp-2 mb-4">
+          <p className="text-gray-200 line-clamp-2 mb-4 drop-shadow-md">
             {news.excerpt}
           </p>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-4 text-sm text-gray-300">
             <div className="flex items-center gap-1">
               <User className="w-4 h-4" />
               <span>{news.author}</span>
