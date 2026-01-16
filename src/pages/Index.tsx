@@ -87,27 +87,6 @@ const Index = () => {
                 </div>
               </div>
 
-              <div>
-                <div className="flex items-center gap-4 mb-6">
-                  <h2 className="font-display text-2xl text-foreground">
-                    Newsletter
-                  </h2>
-                  <div className="flex-1 h-px bg-border" />
-                </div>
-                <div className="bg-card rounded-xl p-6">
-                  <p className="text-muted-foreground mb-4">
-                    Receba as principais notícias do mundo do cinema direto no seu email.
-                  </p>
-                  <input
-                    type="email"
-                    placeholder="Seu email"
-                    className="w-full px-4 py-3 rounded-lg bg-secondary text-foreground placeholder:text-muted-foreground border border-border focus:border-primary focus:outline-none transition-colors mb-3"
-                  />
-                  <button className="w-full px-4 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors">
-                    Inscrever-se
-                  </button>
-                </div>
-              </div>
             </div>
           </section>
         )}
