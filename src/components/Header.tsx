@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, Film, Tv, Play, Star, Search, User, ChevronRight, ChevronLeft } from "lucide-react";
 import noticiaCineLogo from "@/assets/noticia-cine-logo.png";
 import { Input } from "@/components/ui/input";
@@ -26,7 +26,9 @@ const quickLinks = [
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -35,6 +37,15 @@ const Header = () => {
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
       });
+    }
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/busca?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+      setIsSearchOpen(false);
     }
   };
 
@@ -64,14 +75,16 @@ const Header = () => {
           {/* Right - Search & User */}
           <div className="flex items-center gap-2">
             {/* Search - Desktop */}
-            <div className="hidden md:flex items-center bg-muted rounded-md px-3 py-1.5">
+            <form onSubmit={handleSearch} className="hidden md:flex items-center bg-muted rounded-md px-3 py-1.5">
               <Search className="w-4 h-4 text-muted-foreground mr-2" />
               <Input
                 type="text"
                 placeholder="Buscar"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="border-0 bg-transparent h-7 w-32 lg:w-48 p-0 focus-visible:ring-0 text-sm"
               />
-            </div>
+            </form>
             
             {/* Search - Mobile */}
             <button
@@ -92,17 +105,19 @@ const Header = () => {
 
       {/* Mobile Search Bar */}
       {isSearchOpen && (
-        <div className="md:hidden px-4 pb-3 bg-background">
+        <form onSubmit={handleSearch} className="md:hidden px-4 pb-3 bg-background">
           <div className="flex items-center bg-muted rounded-md px-3 py-2">
             <Search className="w-4 h-4 text-muted-foreground mr-2" />
             <Input
               type="text"
               placeholder="Buscar"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="border-0 bg-transparent h-7 p-0 focus-visible:ring-0 text-sm"
               autoFocus
             />
           </div>
-        </div>
+        </form>
       )}
 
       {/* Quick Links Row */}
