@@ -7,6 +7,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import Index from "./pages/Index";
 import NewsDetail from "./pages/NewsDetail";
 import Category from "./pages/Category";
+import Search from "./pages/Search";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
 import Admin from "./pages/Admin";
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/noticia/:slug" element={<NewsDetail />} />
             <Route path="/categoria/:category" element={<Category />} />
+            <Route path="/busca" element={<Search />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route
               path="/admin"
