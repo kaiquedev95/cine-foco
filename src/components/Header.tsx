@@ -64,11 +64,11 @@ const Header = () => {
           </button>
 
           {/* Center - Logo */}
-          <Link to="/" className="absolute left-1/2 -translate-x-1/2 flex items-center">
+          <Link to="/" className="absolute left-1/2 -translate-x-1/2 flex items-center group">
             <img 
               src={noticiaCineLogo} 
               alt="Notícia Cine" 
-              className="h-10 md:h-12"
+              className="h-10 md:h-12 transition-transform duration-300 group-hover:scale-110 animate-fade-in"
             />
           </Link>
 
