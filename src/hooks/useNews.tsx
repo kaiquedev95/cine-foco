@@ -13,7 +13,7 @@ export interface News {
   excerpt: string;
   content: string;
   image_url: string | null;
-  category: 'filme' | 'serie' | 'streaming' | 'review';
+  category: 'filme' | 'serie' | 'streaming' | 'review' | 'mundo';
   author: string;
   featured: boolean | null;
   external_links: NewsRow['external_links'];
@@ -28,7 +28,7 @@ const mapRowToNews = (row: NewsRow): News => ({
   excerpt: row.excerpt,
   content: row.content,
   image_url: row.image_url,
-  category: row.category,
+  category: row.category as News['category'],
   author: row.author,
   featured: row.featured,
   external_links: row.external_links,
@@ -60,6 +60,23 @@ export const useFeaturedNews = () => {
         .select('*')
         .eq('featured', true)
         .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      return data.map(mapRowToNews);
+    },
+  });
+};
+
+export const useWorldNews = () => {
+  return useQuery({
+    queryKey: ['news', 'category', 'mundo'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('news')
+        .select('*')
+        .eq('category', 'mundo')
+        .order('created_at', { ascending: false })
+        .limit(6);
 
       if (error) throw error;
       return data.map(mapRowToNews);
