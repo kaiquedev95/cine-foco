@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, Film, Tv, Play, Star, Search, User, ChevronRight, ChevronLeft } from "lucide-react";
+import { Menu, X, Film, Tv, Play, Star, Search, User, ChevronRight, ChevronLeft, Globe } from "lucide-react";
 import noticiaCineLogo from "@/assets/noticia-cine-logo.png";
 import { Input } from "@/components/ui/input";
 
@@ -9,6 +9,7 @@ const navLinks = [
   { name: "Séries", href: "/categoria/serie", icon: Tv },
   { name: "Streaming", href: "/categoria/streaming", icon: Play },
   { name: "Reviews", href: "/categoria/review", icon: Star },
+  { name: "Mundo", href: "/categoria/mundo", icon: Globe },
 ];
 
 const quickLinks = [
