@@ -9,6 +9,7 @@ const categoryLabels = {
   serie: "Série",
   streaming: "Streaming",
   review: "Review",
+  mundo: "Mundo",
 };
 
 interface NewsCardDBProps {

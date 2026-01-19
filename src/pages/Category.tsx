@@ -22,6 +22,10 @@ const categoryInfo: Record<string, { title: string; description: string }> = {
     title: "Reviews",
     description: "Análises e críticas dos principais lançamentos do cinema e TV.",
   },
+  mundo: {
+    title: "Notícias do Mundo",
+    description: "Tudo que gera impacto no Brasil e no mundo. Política, economia, sociedade e mais.",
+  },
 };
 
 const Category = () => {

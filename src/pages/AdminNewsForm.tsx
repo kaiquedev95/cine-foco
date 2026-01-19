@@ -43,7 +43,7 @@ const AdminNewsForm = () => {
     slug: '',
     excerpt: '',
     content: '',
-    category: 'filme' as 'filme' | 'serie' | 'streaming' | 'review',
+    category: 'filme' as 'filme' | 'serie' | 'streaming' | 'review' | 'mundo',
     author: '',
     featured: false,
     image_url: '',
@@ -287,6 +287,7 @@ const AdminNewsForm = () => {
                   <SelectItem value="serie">Série</SelectItem>
                   <SelectItem value="streaming">Streaming</SelectItem>
                   <SelectItem value="review">Review</SelectItem>
+                  <SelectItem value="mundo">Mundo</SelectItem>
                 </SelectContent>
               </Select>
             </div>
